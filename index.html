@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>News Widget</title>
+<style>
+  .news-widget {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  .news-list {
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+  .news-items {
+    display: flex;
+    transition: transform 0.5s ease;
+  }
+  .news-item {
+    flex: 0 0 auto;
+    width: 200px;
+    margin-right: 20px;
+    background-color: #f0f0f0;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .highlight-bar {
+    width: 5px;
+    background-color: #007bff;
+    position: relative;
+    top: 0;
+    transition: top 0.5s ease;
+  }
+  .news-content {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+  }
+  @media (max-width: 768px) {
+    .news-items {
+      flex-wrap: wrap;
+    }
+    .news-item {
+      width: calc(50% - 10px);
+      margin-right: 10px;
+      margin-bottom: 10px;
+    }
+  }
+  @media (max-width: 576px) {
+    .news-item {
+      width: 100%;
+      margin-right: 0;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="news-widget">
+  <div class="news-list">
+    <div class="news-items" id="newsList">
+      <div class="news-item" onclick="highlightNews(this)">News Item 1</div>
+      <div class="news-item" onclick="highlightNews(this)">News Item 2</div>
+      <div class="news-item" onclick="highlightNews(this)">News Item 3</div>
+      <div class="news-item" onclick="highlightNews(this)">News Item 4</div>
+      <div class="news-item" onclick="highlightNews(this)">News Item 5</div>
+      <div class="news-item" onclick="highlightNews(this)">News Item 6</div>
+      <div class="news-item" onclick="highlightNews(this)">News Item 7</div>
+      <div class="news-item" onclick="highlightNews(this)">News Item 8</div>
+      <div class="news-item" onclick="highlightNews(this)">News Item 9</div>
+      <div class="news-item" onclick="highlightNews(this)">News Item 10</div>
+    </div>
+  </div>
+  <div class="highlight-bar" id="highlightBar"></div>
+  <div class="news-content" id="newsContent">
+    <h2>News Item Title</h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ac consectetur nunc. Donec sed aliquet dolor.</p>
+  </div>
+</div>
+
+<script>
+  function highlightNews(newsItem) {
+    var allNewsItems = document.querySelectorAll('.news-item');
+    allNewsItems.forEach(function(item) {
+      item.style.backgroundColor = '#f0f0f0';
+    });
+    newsItem.style.backgroundColor = '#007bff';
+    var highlightBar = document.getElementById('highlightBar');
+    var newsList = document.getElementById('newsList');
+    var scrollTop = newsList.scrollTop;
+    var itemTop = newsItem.offsetTop - newsList.offsetTop - scrollTop;
+    highlightBar.style.top = itemTop + 'px';
+    var newsContent = document.getElementById('newsContent');
+    newsContent.innerHTML = '<h2>' + newsItem.innerText + '</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ac consectetur nunc. Donec sed aliquet dolor.</p>';
+  }
+</script>
+
+</body>
+</html>
